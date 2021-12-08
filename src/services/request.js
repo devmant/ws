@@ -2,6 +2,7 @@ import axios from "axios";
 
 const request = (requestData) => {
   const { owner, repo, page, sort } = requestData;
+  console.warn(process.env.GIT_HUB_KEY)
   return new Promise((resolve, reject) => {
     axios({
       method: "get",
@@ -13,7 +14,7 @@ const request = (requestData) => {
         sort,
       },
       headers: {
-        Authorization: `token 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`,
+        Authorization: `token ${process.env.REACT_APP_GIT_HUB_KEY}`,
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
       },
     })

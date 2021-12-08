@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import DataTable from "../core/DataTable";
 import { useSelector } from "react-redux";
+import styled from "styled-components";
+import DataTable from "../core/DataTable";
+import NotFoundMessage from "../core/NotFoundMessage";
 import RepositoryForm from "./components/RepositoryForm";
 import { selectIssues } from "../redux/issueListReducer";
-import styled from "styled-components";
 import {
   margins,
   paddings,
   mediaWidth,
-  borderRadius,
 } from "../app/contants";
 import logo from "../images/logo.png";
-import notFound from "../images/notFound.png";
 import request from "../services/request";
 import { useDispatch } from "react-redux";
 import { setIssues } from "../redux/issueListReducer";
@@ -30,10 +29,10 @@ const Home = () => {
     const { data, err } = await request(newState);
     if (!err) {
       dispatch(setIssues(data));
+      setSearchData(newState);
     } else {
       setError(true);
     }
-    setSearchData(newState);
     setLoading(false);
   };
 
@@ -63,7 +62,7 @@ const Home = () => {
         <Logo src={logo} alt="logo" />
         <RepositoryForm onSearch={onSearch} />
       </Head>
-      {displayWarning() && <Warning><img src={notFound} alt="Not found" /></Warning>}
+      {displayWarning() && <NotFoundMessage />}
       <DataTable
         headers={headers}
         data={issues}
@@ -96,13 +95,6 @@ const Logo = styled.img`
   min-width: 240px;
   display: inline-block;
   margin: ${margins.large};
-`;
-
-const Warning = styled.div`
-  border-radius: ${borderRadius.medium};
-  padding: ${paddings.large};
-  margin: ${margins.large};
-  text-align: center;
 `;
 
 export default Home;
