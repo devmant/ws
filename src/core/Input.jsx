@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { theme, borderRadius, paddings } from "../app/contants";
+import PropTypes from "prop-types";
 
 const Input = ({ label, type, value, onChange, onClick, primary }) => (
   <Label>
@@ -15,6 +16,15 @@ const Input = ({ label, type, value, onChange, onClick, primary }) => (
     />
   </Label>
 );
+
+Input.propTypes = {
+  label: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  onClick: PropTypes.func,
+  primary: PropTypes.bool,
+};
 
 const Label = styled.label`
   display: flex;
@@ -36,7 +46,8 @@ const InputField = styled.input`
   border-radius: ${borderRadius.medium};
   border: 1px solid ${theme.hover};
   background-color: ${(props) => (props.primary ? theme.primary : theme.inner)};
-  cursor: ${(props) => (props.type === "submit" || props.type === "button" ? "pointer" : "auto")};
+  cursor: ${(props) =>
+    props.type === "submit" || props.type === "button" ? "pointer" : "auto"};
 `;
 
 export default Input;

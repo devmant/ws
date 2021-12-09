@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from 'prop-types';
 import { openInNewTab } from "../services/helpers";
 import { theme, borderRadius, paddings, margins } from "../app/contants";
+import { issueDataType } from "../app/dataTypes";
 import Input from "./Input";
 import Loader from "./Loader";
 
@@ -81,6 +83,20 @@ const DataTable = ({ headers, data, onSort, onPageChange, page, loading }) => {
       )}
     </>
   );
+};
+
+
+
+DataTable.propTypes = {
+  headers: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    sort: PropTypes.bool
+  })),
+  data: PropTypes.arrayOf(issueDataType),
+  onSort: PropTypes.func,
+  onPageChange: PropTypes.func,
+  page: PropTypes.number,
+  loading: PropTypes.bool
 };
 
 const Main = styled.div`

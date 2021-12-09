@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Input from "../../core/Input";
 import { theme, borderRadius, paddings, mediaWidth } from "../../app/contants";
 import styled from "styled-components";
+import PropTypes from 'prop-types';
 
 const RepositoryForm = ({onSearch}) => {
   const [owner, setOwner] = useState("");
@@ -27,6 +28,10 @@ const RepositoryForm = ({onSearch}) => {
       <Input primary type="submit" value="Submit" />
     </Form>
   );
+};
+
+RepositoryForm.propTypes = {
+  onSearch: PropTypes.func,
 };
 
 const Form = styled.form`
