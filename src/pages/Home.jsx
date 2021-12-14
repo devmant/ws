@@ -45,7 +45,7 @@ const Home = () => {
   };
 
   const displayWarning = () =>
-    !loading && searchData && (!issues.length || error);
+    !loading && searchData && (!issues?.length || error);
 
   const headers = [
     { title: "Title", sort: false },
