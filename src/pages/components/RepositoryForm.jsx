@@ -18,12 +18,14 @@ const RepositoryForm = ({onSearch}) => {
         type="text"
         value={owner}
         onChange={setOwner}
+        placeholder="microsoft"
       />
       <Input
         label="Repository name"
         type="text"
         value={repo}
         onChange={setRepo}
+        placeholder="typescript"
       />
       <Input primary type="submit" value="Submit" />
     </Form>

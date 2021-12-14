@@ -3,16 +3,17 @@ import styled from "styled-components";
 import { theme, borderRadius, paddings } from "../app/contants";
 import PropTypes from "prop-types";
 
-const Input = ({ label, type, value, onChange, onClick, primary }) => (
+const Input = ({ label, type, value, onChange, onClick, primary, placeholder }) => (
   <Label>
     <Title name="label">{label}</Title>
     <InputField
-      name="input"
+      name={label}
       primary={primary}
       type={type}
       value={value}
       onChange={(e) => onChange(e.target.value)}
       onClick={onClick}
+      placeholder={placeholder}
       required
     />
   </Label>
@@ -25,6 +26,7 @@ Input.propTypes = {
   onChange: PropTypes.func,
   onClick: PropTypes.func,
   primary: PropTypes.bool,
+  placeholder: PropTypes.string
 };
 
 const Label = styled.label`
