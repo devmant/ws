@@ -5,8 +5,9 @@ import PropTypes from "prop-types";
 
 const Input = ({ label, type, value, onChange, onClick, primary }) => (
   <Label>
-    <Title>{label}</Title>
+    <Title name="label">{label}</Title>
     <InputField
+      name="input"
       primary={primary}
       type={type}
       value={value}

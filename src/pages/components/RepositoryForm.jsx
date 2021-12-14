@@ -12,7 +12,7 @@ const RepositoryForm = ({onSearch}) => {
     onSearch(owner, repo)
   }
   return (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit} data-testid="form">
       <Input
         label="Repository owner"
         type="text"

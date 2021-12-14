@@ -5,7 +5,7 @@ import notFound from "../images/notFound.png";
 
 const NotFoundMessage = () => {
   return (
-    <Message>
+    <Message name="message">
       <img src={notFound} alt="Not found" />
     </Message>
   );

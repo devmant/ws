@@ -7,7 +7,7 @@ import { issueDataType } from "../app/dataTypes";
 import Input from "./Input";
 import Loader from "./Loader";
 
-const DataTable = ({ headers, data, onSort, onPageChange, page, loading }) => {
+const DataTable = ({ headers, data, onSort, onPageChange, page = 1, loading }) => {
   const renderHeader = () => {
     return (
       <Tr>
@@ -17,6 +17,7 @@ const DataTable = ({ headers, data, onSort, onPageChange, page, loading }) => {
             <Th
               sort={sort}
               key={title}
+              role="header"
               onClick={() => {
                 if (sort) {
                   onSort(title.toLowerCase());
@@ -32,7 +33,7 @@ const DataTable = ({ headers, data, onSort, onPageChange, page, loading }) => {
   };
   const renderData = () => {
     return data.map((item) => (
-      <Tr key={item.id} onClick={() => openInNewTab(item.html_url)}>
+      <Tr role="data" key={item.id} onClick={() => openInNewTab(item.html_url)}>
         <Td>{item.title}</Td>
         <Td>{renderDate(item.updated_at)}</Td>
         <Td>{item.state.toUpperCase()}</Td>
@@ -63,7 +64,7 @@ const DataTable = ({ headers, data, onSort, onPageChange, page, loading }) => {
     );
   };
 
-  const hasData = !!data.length;
+  const hasData = !!data?.length;
   return (
     <>
       {loading ? (
@@ -72,11 +73,11 @@ const DataTable = ({ headers, data, onSort, onPageChange, page, loading }) => {
         hasData && (
           <>
             <Main>
-              <Table>
+              <Table role="dataTable">
                 <thead>{renderHeader()}</thead>
                 <tbody>{renderData()}</tbody>
               </Table>
-              <Pagination>{renderPagination()}</Pagination>
+              <Pagination role="pagination">{renderPagination()}</Pagination>
             </Main>
           </>
         )
@@ -84,8 +85,6 @@ const DataTable = ({ headers, data, onSort, onPageChange, page, loading }) => {
     </>
   );
 };
-
-
 
 DataTable.propTypes = {
   headers: PropTypes.arrayOf(PropTypes.shape({

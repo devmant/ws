@@ -5,11 +5,7 @@ import DataTable from "../core/DataTable";
 import NotFoundMessage from "../core/NotFoundMessage";
 import RepositoryForm from "./components/RepositoryForm";
 import { selectIssues } from "../redux/issueListReducer";
-import {
-  margins,
-  paddings,
-  mediaWidth,
-} from "../app/contants";
+import { margins, paddings, mediaWidth } from "../app/contants";
 import logo from "../images/logo.png";
 import request from "../services/request";
 import { useDispatch } from "react-redux";
@@ -27,16 +23,16 @@ const Home = () => {
     setLoading(true);
     const newState = { ...searchData, ...requestData };
     const { data, err } = await request(newState);
+    setLoading(false);
     if (!err) {
       dispatch(setIssues(data));
       setSearchData(newState);
     } else {
       setError(true);
     }
-    setLoading(false);
   };
 
-  const onSearch = async (owner, repo) => {
+  const onSearch = (owner, repo) => {
     fetchData({ ...searchData, page: 1, owner, repo });
   };
 
@@ -48,7 +44,8 @@ const Home = () => {
     fetchData({ ...searchData, sort });
   };
 
-  const displayWarning = () => !loading && searchData && (!issues.length || error);
+  const displayWarning = () =>
+    !loading && searchData && (!issues.length || error);
 
   const headers = [
     { title: "Title", sort: false },
@@ -57,21 +54,23 @@ const Home = () => {
   ];
 
   return (
-    <Main>
-      <Head>
-        <Logo src={logo} alt="logo" />
-        <RepositoryForm onSearch={onSearch} />
-      </Head>
-      {displayWarning() && <NotFoundMessage />}
-      <DataTable
-        headers={headers}
-        data={issues}
-        onSort={onSort}
-        onPageChange={onPageChange}
-        page={searchData?.page || 1}
-        loading={loading}
-      />
-    </Main>
+    <>
+      <Main>
+          <Head>
+            <Logo src={logo} alt="logo" />
+            <RepositoryForm onSearch={onSearch} />
+          </Head>
+          {displayWarning() && <NotFoundMessage />}
+          <DataTable
+            headers={headers}
+            data={issues}
+            onSort={onSort}
+            onPageChange={onPageChange}
+            page={searchData?.page || 1}
+            loading={loading}
+          />
+      </Main>
+    </>
   );
 };
 

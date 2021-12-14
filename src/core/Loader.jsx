@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { theme, margins } from "../app/contants";
 
-const Loader = () => <Spinner />;
+const Loader = () => <Spinner role="loader" />;
 
 const Spinner = styled.div`
   border: 16px solid ${theme.primary};
